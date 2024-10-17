@@ -13,54 +13,106 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum AccountType {
-  savings
-  checking
-  investment
-}
-
-model Customer {
-  id           BigInt    @id @default(autoincrement())
+model User {
+  id           BigInt         @id @default(autoincrement())
   name         String
-  address      String
-  phone_number String
-  createdAt    DateTime  @default(now())
+  email        String
+  password     String
+  createdAt    DateTime       @default(now())
   updatedAt    DateTime?
   deletedAt    DateTime?
-  accounts     Account[]
+  Bank_account Bank_account[]
+  Profile      Profile[]
 
-  @@map("customers")
+  @@map("users")
 }
 
-model Account {
-  id           BigInt        @id @default(autoincrement())
-  customer_id  BigInt
-  type         AccountType
-  balance      Decimal       @default(0.00)
-  created_at   DateTime      @default(now())
-  updated_at   DateTime?
-  deleted_at   DateTime?
-  customer     Customer      @relation(fields: [customer_id], references: [id])
-  transactions Transaction[]
+model Bank_account {
+  id                   BigInt        @id @default(autoincrement())
+  user_id              BigInt
+  bank_name            String
+  bank_account_number  String
+  balance              Decimal       @default(0.00)
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime?
+  deletedAt            DateTime?
+  user                 User          @relation(fields: [user_id], references: [id])
+  sentTransactions     Transaction[] @relation("sentTransactions")
+  receivedTransactions Transaction[] @relation("receivedTransactions")
 
-  @@map("accounts")
+  @@map("bank_accounts")
 }
 
-enum TransactionType {
-  deposit
-  withdrawal
-  transfer
+model Profile {
+  id              BigInt @id @default(autoincrement())
+  user_id         BigInt
+  identity_type   String
+  identity_number String
+  address         String
+  user            User   @relation(fields: [user_id], references: [id])
+
+  @@map("profiles")
 }
 
 model Transaction {
-  id         BigInt          @id @default(autoincrement())
-  account_id BigInt
-  amount     Decimal         @default(0.00)
-  type       TransactionType
-  created_at DateTime        @default(now())
-  updated_at DateTime?
-  deleted_at DateTime?
-  account    Account         @relation(fields: [account_id], references: [id])
+  id                     BigInt       @id @default(autoincrement())
+  source_account_id      BigInt
+  destination_account_id BigInt
+  amount                 Decimal      @default(0.00)
+  sourceAccount          Bank_account @relation("sentTransactions", fields: [source_account_id], references: [id])
+  destinationAccount     Bank_account @relation("receivedTransactions", fields: [destination_account_id], references: [id])
 
   @@map("transactions")
 }
+
+// enum AccountType {
+//   savings
+//   checking
+//   investment
+// }
+
+// model Customer {
+//   id           BigInt    @id @default(autoincrement())
+//   name         String
+//   address      String
+//   phone_number String
+//   createdAt    DateTime  @default(now())
+//   updatedAt    DateTime?
+//   deletedAt    DateTime?
+//   accounts     Account[]
+
+//   @@map("customers")
+// }
+
+// model Account {
+//   id           BigInt        @id @default(autoincrement())
+//   customer_id  BigInt
+//   type         AccountType
+//   balance      Decimal       @default(0.00)
+//   created_at   DateTime      @default(now())
+//   updated_at   DateTime?
+//   deleted_at   DateTime?
+//   customer     Customer      @relation(fields: [customer_id], references: [id])
+//   transactions Transaction[]
+
+//   @@map("accounts")
+// }
+
+// enum TransactionType {
+//   deposit
+//   withdrawal
+//   transfer
+// }
+
+// model Transaction {
+//   id         BigInt          @id @default(autoincrement())
+//   account_id BigInt
+//   amount     Decimal         @default(0.00)
+//   type       TransactionType
+//   created_at DateTime        @default(now())
+//   updated_at DateTime?
+//   deleted_at DateTime?
+//   account    Account         @relation(fields: [account_id], references: [id])
+
+//   @@map("transactions")
+// }
