@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id           BigInt         @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   name         String
   email        String
   password     String
@@ -28,8 +28,8 @@ model User {
 }
 
 model Bank_account {
-  id                   BigInt        @id @default(autoincrement())
-  user_id              BigInt
+  id                   Int           @id @default(autoincrement())
+  user_id              Int
   bank_name            String
   bank_account_number  String
   balance              Decimal       @default(0.00)
@@ -44,8 +44,8 @@ model Bank_account {
 }
 
 model Profile {
-  id              BigInt @id @default(autoincrement())
-  user_id         BigInt
+  id              Int    @id @default(autoincrement())
+  user_id         Int
   identity_type   String
   identity_number String
   address         String
@@ -55,64 +55,12 @@ model Profile {
 }
 
 model Transaction {
-  id                     BigInt       @id @default(autoincrement())
-  source_account_id      BigInt
-  destination_account_id BigInt
+  id                     Int          @id @default(autoincrement())
+  source_account_id      Int
+  destination_account_id Int
   amount                 Decimal      @default(0.00)
   sourceAccount          Bank_account @relation("sentTransactions", fields: [source_account_id], references: [id])
   destinationAccount     Bank_account @relation("receivedTransactions", fields: [destination_account_id], references: [id])
 
   @@map("transactions")
 }
-
-// enum AccountType {
-//   savings
-//   checking
-//   investment
-// }
-
-// model Customer {
-//   id           BigInt    @id @default(autoincrement())
-//   name         String
-//   address      String
-//   phone_number String
-//   createdAt    DateTime  @default(now())
-//   updatedAt    DateTime?
-//   deletedAt    DateTime?
-//   accounts     Account[]
-
-//   @@map("customers")
-// }
-
-// model Account {
-//   id           BigInt        @id @default(autoincrement())
-//   customer_id  BigInt
-//   type         AccountType
-//   balance      Decimal       @default(0.00)
-//   created_at   DateTime      @default(now())
-//   updated_at   DateTime?
-//   deleted_at   DateTime?
-//   customer     Customer      @relation(fields: [customer_id], references: [id])
-//   transactions Transaction[]
-
-//   @@map("accounts")
-// }
-
-// enum TransactionType {
-//   deposit
-//   withdrawal
-//   transfer
-// }
-
-// model Transaction {
-//   id         BigInt          @id @default(autoincrement())
-//   account_id BigInt
-//   amount     Decimal         @default(0.00)
-//   type       TransactionType
-//   created_at DateTime        @default(now())
-//   updated_at DateTime?
-//   deleted_at DateTime?
-//   account    Account         @relation(fields: [account_id], references: [id])
-
-//   @@map("transactions")
-// }

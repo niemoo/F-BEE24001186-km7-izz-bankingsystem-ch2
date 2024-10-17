@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "users" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -13,8 +13,8 @@ CREATE TABLE "users" (
 
 -- CreateTable
 CREATE TABLE "bank_accounts" (
-    "id" BIGSERIAL NOT NULL,
-    "user_id" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "user_id" INTEGER NOT NULL,
     "bank_name" TEXT NOT NULL,
     "bank_account_number" TEXT NOT NULL,
     "balance" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
@@ -27,8 +27,8 @@ CREATE TABLE "bank_accounts" (
 
 -- CreateTable
 CREATE TABLE "profiles" (
-    "id" BIGSERIAL NOT NULL,
-    "user_id" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "user_id" INTEGER NOT NULL,
     "identity_type" TEXT NOT NULL,
     "identity_number" TEXT NOT NULL,
     "address" TEXT NOT NULL,
@@ -38,9 +38,9 @@ CREATE TABLE "profiles" (
 
 -- CreateTable
 CREATE TABLE "transactions" (
-    "id" BIGSERIAL NOT NULL,
-    "source_account_id" BIGINT NOT NULL,
-    "destination_account_id" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "source_account_id" INTEGER NOT NULL,
+    "destination_account_id" INTEGER NOT NULL,
     "amount" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
 
     CONSTRAINT "transactions_pkey" PRIMARY KEY ("id")
