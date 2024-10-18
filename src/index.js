@@ -1,14 +1,23 @@
 const express = require('express');
-const accounts = require('./routes/account.js');
-const users = require('./routes/user.js');
+const accounts = require('./routes/accountRoute.js');
+const users = require('./routes/userRoute.js');
+const transaction = require('./routes/transactionRoute.js');
+const errorMiddleware = require('./middleware/errorMiddleware.js');
 
-const app = express();
+const main = () => {
+  const app = express();
 
-app.use(express.json());
+  app.use(express.json());
 
-accounts(app);
-users(app);
+  accounts(app);
+  users(app);
+  transaction(app);
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+  app.use(errorMiddleware);
+
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
+};
+
+main();
