@@ -22,11 +22,11 @@ module.exports = (app) => {
 
       res.status(200).json({
         data,
-        message: 'Successfully get all accounts',
+        message: 'Successfully get all accounts data.',
       });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: 'Internal Server Error.' });
     }
   });
 
@@ -37,7 +37,7 @@ module.exports = (app) => {
 
       res.status(200).json({
         data,
-        message: `Successfully get account by ID: ${accountId}`,
+        message: `Successfully get account data by ID: ${accountId}.`,
       });
     } catch (err) {
       console.error(err);
@@ -53,10 +53,10 @@ module.exports = (app) => {
 
       res.status(200).json({
         balance: data[0].balance,
-        message: `Successfully get current balance by bank account with ID: ${id}`,
+        message: `Successfully get current balance by bank account with ID: ${id}.`,
       });
     } catch (err) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: 'Internal Server Error.' });
     }
   });
 
@@ -73,7 +73,7 @@ module.exports = (app) => {
 
       res.status(201).json({
         data,
-        message: 'Successfully created a new account',
+        message: 'Successfully created a new account.',
       });
     } catch (err) {
       next(err);
