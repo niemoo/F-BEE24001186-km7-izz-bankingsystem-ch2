@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int            @id @default(autoincrement())
+  name         String
+  email        String
+  password     String
+  created_at   DateTime       @default(now())
+  updated_at   DateTime?
+  deleted_at   DateTime?
+  Bank_account Bank_account[]
+  Profile      Profile[]
+
+  @@map("users")
+}
+
+model Bank_account {
+  id                   Int           @id @default(autoincrement())
+  user_id              Int
+  bank_name            String
+  bank_account_number  String
+  balance              Decimal       @default(0.00)
+  created_at           DateTime      @default(now())
+  updated_at           DateTime?
+  deleted_at           DateTime?
+  user                 User          @relation(fields: [user_id], references: [id])
+  sentTransactions     Transaction[] @relation("sentTransactions")
+  receivedTransactions Transaction[] @relation("receivedTransactions")
+
+  @@map("bank_accounts")
+}
+
+model Profile {
+  id              Int       @id @default(autoincrement())
+  user_id         Int
+  identity_type   String
+  identity_number String
+  address         String
+  created_at      DateTime  @default(now())
+  updated_at      DateTime?
+  deleted_at      DateTime?
+  user            User      @relation(fields: [user_id], references: [id])
+
+  @@map("profiles")
+}
+
+model Transaction {
+  id                     Int          @id @default(autoincrement())
+  source_account_id      Int
+  destination_account_id Int
+  amount                 Decimal      @default(0.00)
+  sourceAccount          Bank_account @relation("sentTransactions", fields: [source_account_id], references: [id])
+  destinationAccount     Bank_account @relation("receivedTransactions", fields: [destination_account_id], references: [id])
+
+  @@map("transactions")
+}

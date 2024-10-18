@@ -1,3 +1,4 @@
+-- Active: 1728390304427@@127.0.0.1@5432@ch_four
 CREATE TYPE account_type AS ENUM ('savings', 'checking', 'investment');
 
 CREATE TABLE IF NOT EXISTS accounts (

@@ -1,4 +1,4 @@
--- Active: 1728390304427@@127.0.0.1@5432@binar_challenge
+-- Active: 1728390304427@@127.0.0.1@5432@ch_four
 CREATE TABLE IF NOT EXISTS customers (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
