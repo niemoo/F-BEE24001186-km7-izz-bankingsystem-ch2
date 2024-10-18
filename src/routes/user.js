@@ -22,7 +22,7 @@ module.exports = (app) => {
   router.get('/:userId', async (req, res) => {
     try {
       const { userId } = req.params;
-      const data = await UserService.getUserById(parseInt(userId));
+      const data = await UserService.getUserById(userId);
 
       res.status(200).json({ data });
     } catch (err) {

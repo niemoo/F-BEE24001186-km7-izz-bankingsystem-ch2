@@ -17,9 +17,9 @@ class UserService {
       const allUsers = await prisma.user.findMany();
 
       return allUsers;
-    } catch (error) {
-      console.error('Error fetching users:', error);
-      throw error;
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      throw err;
     }
   }
 
@@ -27,14 +27,14 @@ class UserService {
     try {
       const user = await prisma.user.findUnique({
         where: {
-          id: id,
+          id: parseInt(id),
         },
       });
 
       return user;
-    } catch (error) {
-      console.error('Error fetching user by ID:', error);
-      throw error;
+    } catch (err) {
+      console.error('Error fetching user by ID:', err);
+      throw err;
     }
   }
 
@@ -49,9 +49,9 @@ class UserService {
       });
 
       return newUser;
-    } catch (error) {
-      console.error('Error creating user:', error);
-      throw error;
+    } catch (err) {
+      console.error('Error creating user:', err);
+      throw err;
     }
   }
 }

@@ -18,9 +18,9 @@ model User {
   name         String
   email        String
   password     String
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime?
-  deletedAt    DateTime?
+  created_at   DateTime       @default(now())
+  updated_at   DateTime?
+  deleted_at   DateTime?
   Bank_account Bank_account[]
   Profile      Profile[]
 
@@ -33,9 +33,9 @@ model Bank_account {
   bank_name            String
   bank_account_number  String
   balance              Decimal       @default(0.00)
-  createdAt            DateTime      @default(now())
-  updatedAt            DateTime?
-  deletedAt            DateTime?
+  created_at           DateTime      @default(now())
+  updated_at           DateTime?
+  deleted_at           DateTime?
   user                 User          @relation(fields: [user_id], references: [id])
   sentTransactions     Transaction[] @relation("sentTransactions")
   receivedTransactions Transaction[] @relation("receivedTransactions")
@@ -44,12 +44,15 @@ model Bank_account {
 }
 
 model Profile {
-  id              Int    @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   user_id         Int
   identity_type   String
   identity_number String
   address         String
-  user            User   @relation(fields: [user_id], references: [id])
+  created_at      DateTime  @default(now())
+  updated_at      DateTime?
+  deleted_at      DateTime?
+  user            User      @relation(fields: [user_id], references: [id])
 
   @@map("profiles")
 }
