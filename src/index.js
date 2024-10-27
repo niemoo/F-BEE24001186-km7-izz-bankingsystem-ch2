@@ -1,5 +1,5 @@
 import express from 'express';
-import errorMiddleware from './middleware/errorMiddleware.js';
+
 // import swaggerUi from 'swagger-ui-express';
 // import swaggerFile from '../swagger-output.json' assert { type: 'json' };
 import routes from './routes/index.js';
@@ -10,7 +10,6 @@ const main = () => {
   app.use(express.json());
   routes(app);
 
-  app.use(errorMiddleware);
   // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
   app.listen(3000, () => {
