@@ -1,12 +1,11 @@
-const express = require('express');
-const { AccountController } = require('../controllers/accountController.js');
+import express from 'express';
+import { AccountController } from '../controllers/accountController.js';
+import { AccountValidation } from '../middleware/validations/accountValidation.js';
 
-module.exports = (app) => {
+export default (app) => {
   const router = express.Router();
-
+  app.use('/accounts', router);
   const accountController = new AccountController();
-
-  app.use('/api/v1/accounts', router);
 
   router.get('/', accountController.getAllAccounts.bind(accountController));
 
@@ -14,7 +13,7 @@ module.exports = (app) => {
 
   router.get('/:id/balance', accountController.getCurrentBalanceById.bind(accountController));
 
-  router.post('/', accountController.addAccount.bind(accountController));
+  router.post('/', AccountValidation.addAccountValidation, accountController.addAccount.bind(accountController));
 
   router.put('/:id/deposit', accountController.depositBalance.bind(accountController));
 

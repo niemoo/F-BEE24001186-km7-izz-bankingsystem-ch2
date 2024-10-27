@@ -1,16 +1,6 @@
-const joi = require('joi');
-const { UserService } = require('../services/userService');
+import { UserService } from '../services/userService.js';
 
-const schema = joi.object({
-  name: joi.string().required(),
-  email: joi.string().email().required(),
-  password: joi.string().required(),
-  identity_type: joi.string().required(),
-  identity_number: joi.string().required(),
-  address: joi.string().required(),
-});
-
-class UserController {
+export class UserController {
   constructor() {
     this.userService = new UserService();
   }
@@ -38,18 +28,11 @@ class UserController {
 
   async addUser(req, res, next) {
     try {
-      const { value, error } = schema.validate(req.body);
+      const value = req.body;
 
-      if (error) {
-        error.isJoi = true;
-        return next(error);
-      }
+      const newUser = new UserService();
 
-      const { name, email, password, identity_type, identity_number, address } = value;
-
-      const newUser = new UserService(name, email, password, identity_type, identity_number, address);
-
-      const data = await newUser.addUser();
+      const data = await newUser.addUser(value);
 
       res.status(201).json({ data, message: 'Successfully created a new user.' });
     } catch (err) {
@@ -57,5 +40,3 @@ class UserController {
     }
   }
 }
-
-module.exports = { UserController };

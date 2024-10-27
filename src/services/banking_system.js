@@ -1,6 +1,6 @@
-const readline = require('node:readline');
-const { BankAccount } = require('./bank_account');
-const { prompt } = require('../../prompt');
+import readline from 'node:readline';
+import { BankAccount } from './bank_account.js';
+import { prompt } from '../../.js';
 
 function main() {
   const rl = readline.createInterface({
