@@ -17,10 +17,10 @@ export class UserController {
 
   async getUserById(req, res, next) {
     try {
-      const { userId } = req.params;
-      const data = await UserService.getUserById(userId);
+      const { id } = req.params;
+      const data = await UserService.getUserById(id);
 
-      res.status(200).json({ data, message: `Successfully get user data by ID: ${userId}.` });
+      res.status(200).json({ data, message: `Successfully get user data by ID: ${id}.` });
     } catch (err) {
       next(err);
     }

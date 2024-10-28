@@ -199,7 +199,7 @@ describe('Account Service', () => {
 
       const accountService = new AccountService();
 
-      await expect(accountService.deposit(id, depositAmount)).rejects.toThrow('Deposit failed.');
+      await expect(accountService.deposit(id, depositAmount)).rejects.toThrow('Failed to deposit to an account.');
     });
   });
 

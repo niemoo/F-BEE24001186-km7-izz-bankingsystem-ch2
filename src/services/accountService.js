@@ -92,7 +92,7 @@ export class AccountService {
     });
 
     if (!updatedAccount) {
-      throw new ErrorResponse(500, 'Deposit failed.');
+      throw new ErrorResponse(500, 'Failed to deposit to an account.');
     }
 
     return updatedAccount;

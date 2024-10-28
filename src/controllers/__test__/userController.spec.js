@@ -99,7 +99,7 @@ describe('User Controller', () => {
         ],
       };
 
-      req.params.userId = user.id;
+      req.params.id = user.id;
       prisma.user.findUnique.mockResolvedValueOnce(user);
 
       await userController.getUserById(req, res, next);
@@ -113,7 +113,7 @@ describe('User Controller', () => {
 
     it('should throw an error if user not found', async () => {
       const id = 1;
-      req.params.userId = id;
+      req.params.id = id;
 
       prisma.user.findUnique.mockResolvedValueOnce(null);
 
@@ -163,6 +163,7 @@ describe('User Controller', () => {
 
       await userController.addUser(req, res, next);
 
+      expect(next).toHaveBeenCalledWith(expect.any(Error));
       expect(next).toHaveBeenCalledWith(errorMessage);
     });
   });
