@@ -1,13 +1,14 @@
 import express from 'express';
 import { AccountController } from '../controllers/accountController.js';
 import { AccountValidation } from '../middleware/validations/accountValidation.js';
+import authMiddleware from '../middleware/authMiddleware.js';
 
 export default (app) => {
   const router = express.Router();
   app.use('/accounts', router);
   const accountController = new AccountController();
 
-  router.get('/', accountController.getAllAccounts.bind(accountController));
+  router.get('/', authMiddleware, accountController.getAllAccounts.bind(accountController));
 
   router.get('/:id', accountController.getAccountById.bind(accountController));
 

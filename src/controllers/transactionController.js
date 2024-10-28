@@ -17,8 +17,8 @@ export class TransactionController {
 
   async getTransactionById(req, res, next) {
     try {
-      const { transactionId } = req.params;
-      const transaction = await this.transactionService.getTransactionById(transactionId);
+      const { id } = req.params;
+      const transaction = await this.transactionService.getTransactionById(id);
 
       const responseData = {
         id: transaction.id,
@@ -37,7 +37,7 @@ export class TransactionController {
 
       res.status(200).json({
         data: responseData,
-        message: `Successfully get transaction data by ID: ${transactionId}.`,
+        message: `Successfully get transaction data by ID: ${id}.`,
       });
     } catch (err) {
       next(err);
