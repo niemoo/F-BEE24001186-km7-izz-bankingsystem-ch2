@@ -1,13 +1,6 @@
-const joi = require('joi');
-const { TransactionService } = require('../services/transactionService');
+import { TransactionService } from '../services/transactionService.js';
 
-const schema = joi.object({
-  source_account_id: joi.number().required(),
-  destination_account_id: joi.number().required(),
-  amount: joi.number().required(),
-});
-
-class TransactionController {
+export class TransactionController {
   constructor() {
     this.transactionService = new TransactionService();
   }
@@ -53,17 +46,10 @@ class TransactionController {
 
   async transferBalance(req, res, next) {
     try {
-      const { value, error } = schema.validate(req.body);
+      const { source_account_id, destination_account_id, amount } = req.body;
 
-      if (error) {
-        error.isJoi = true;
-        next(error);
-      }
-
-      const { source_account_id, destination_account_id, amount } = value;
-
-      const transaction = new TransactionService(source_account_id, destination_account_id, amount);
-      const data = await transaction.transferBalance();
+      const transaction = new TransactionService();
+      const data = await transaction.transferBalance(source_account_id, destination_account_id, amount);
 
       res.status(200).json({ data, message: 'Successfully transfer balance.' });
     } catch (err) {
@@ -71,5 +57,3 @@ class TransactionController {
     }
   }
 }
-
-module.exports = { TransactionController };

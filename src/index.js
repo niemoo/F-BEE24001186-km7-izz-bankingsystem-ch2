@@ -1,19 +1,16 @@
-const express = require('express');
-const accounts = require('./routes/accountRoute.js');
-const users = require('./routes/userRoute.js');
-const transaction = require('./routes/transactionRoute.js');
-const errorMiddleware = require('./middleware/errorMiddleware.js');
+import express from 'express';
+
+// import swaggerUi from 'swagger-ui-express';
+// import swaggerFile from '../swagger-output.json' assert { type: 'json' };
+import routes from './routes/index.js';
 
 const main = () => {
   const app = express();
 
   app.use(express.json());
+  routes(app);
 
-  accounts(app);
-  users(app);
-  transaction(app);
-
-  app.use(errorMiddleware);
+  // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
   app.listen(3000, () => {
     console.log('Server is running on port 3000');

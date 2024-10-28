@@ -1,22 +1,20 @@
-class notNumberError extends Error {
+export class notNumberError extends Error {
   constructor(message) {
     super(message);
     this.name = 'notNumberError';
   }
 }
 
-class negativeAmountError extends Error {
+export class negativeAmountError extends Error {
   constructor(message) {
     super(message);
     this.name = 'negativeAmountError';
   }
 }
 
-class notEnoughBalanceError extends Error {
+export class notEnoughBalanceError extends Error {
   constructor(message) {
     super(message);
     this.name = 'notEnoughBalanceError';
   }
 }
-
-module.exports = { notNumberError, negativeAmountError, notEnoughBalanceError };

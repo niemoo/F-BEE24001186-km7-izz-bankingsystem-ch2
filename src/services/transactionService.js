@@ -1,16 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
-const db = require('../db/index');
-const { ErrorResponse } = require('../response/errorResponse');
+import { PrismaClient } from '@prisma/client';
+import { ErrorResponse } from '../response/errorResponse.js';
 
 const prisma = new PrismaClient();
 
-class TransactionService {
-  constructor(source_account_id, destination_account_id, amount) {
-    this.source_account_id = source_account_id;
-    this.destination_account_id = destination_account_id;
-    this.amount = amount;
-  }
-
+export class TransactionService {
   async getAllTransactions() {
     const allTransactions = await prisma.transaction.findMany();
 
@@ -47,63 +40,61 @@ class TransactionService {
     return transaction;
   }
 
-  async transferBalance() {
+  async transferBalance(source_account_id, destination_account_id, amount) {
     const sourceAccount = await prisma.bank_account.findUnique({
       where: {
-        id: parseInt(this.source_account_id),
+        id: parseInt(source_account_id),
       },
     });
 
     if (!sourceAccount) {
-      throw new ErrorResponse(404, `Source account with ID: ${this.source_account_id} not found.`);
+      throw new ErrorResponse(404, `Source account with ID: ${source_account_id} not found.`);
     }
 
     const destinationAccount = await prisma.bank_account.findUnique({
       where: {
-        id: parseInt(this.destination_account_id),
+        id: parseInt(destination_account_id),
       },
     });
 
     if (!destinationAccount) {
-      throw new ErrorResponse(404, `Destination account with ID: ${this.destination_account_id} not found.`);
+      throw new ErrorResponse(404, `Destination account with ID: ${destination_account_id} not found.`);
     }
 
-    if (sourceAccount.balance < this.amount) {
+    if (sourceAccount.balance < amount) {
       throw new ErrorResponse(400, 'Insufficient balance.');
     }
 
     const updatedSourceAccount = await prisma.bank_account.update({
       where: {
-        id: parseInt(this.source_account_id),
+        id: parseInt(source_account_id),
       },
       data: {
         balance: {
-          decrement: this.amount,
+          decrement: amount,
         },
       },
     });
 
     const updatedDestinationAccount = await prisma.bank_account.update({
       where: {
-        id: parseInt(this.destination_account_id),
+        id: parseInt(destination_account_id),
       },
       data: {
         balance: {
-          increment: this.amount,
+          increment: amount,
         },
       },
     });
 
     const transaction = await prisma.transaction.create({
       data: {
-        source_account_id: parseInt(this.source_account_id),
-        destination_account_id: parseInt(this.destination_account_id),
-        amount: this.amount,
+        source_account_id: parseInt(source_account_id),
+        destination_account_id: parseInt(destination_account_id),
+        amount: amount,
       },
     });
 
     return transaction;
   }
 }
-
-module.exports = { TransactionService };
