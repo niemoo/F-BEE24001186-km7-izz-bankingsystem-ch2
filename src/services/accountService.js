@@ -62,6 +62,10 @@ export class AccountService {
       },
     });
 
+    if (!newAccount) {
+      throw new ErrorResponse(500, 'Bank account creation failed.');
+    }
+
     return newAccount;
   }
 
@@ -86,6 +90,10 @@ export class AccountService {
         },
       },
     });
+
+    if (!updatedAccount) {
+      throw new ErrorResponse(500, 'Deposit failed.');
+    }
 
     return updatedAccount;
   }
@@ -115,6 +123,10 @@ export class AccountService {
         },
       },
     });
+
+    if (!updatedAccount) {
+      throw new ErrorResponse(500, 'Withdrawal failed.');
+    }
 
     return updatedAccount;
   }

@@ -39,7 +39,7 @@ export class UserService {
     });
 
     if (checkUser) {
-      throw new ErrorResponse(200, 'Email already registered.');
+      throw new ErrorResponse(409, 'Email already registered.');
     }
 
     const newUser = await prisma.user.create({
@@ -59,6 +59,10 @@ export class UserService {
         Profile: true,
       },
     });
+
+    if (!newUser) {
+      throw new ErrorResponse(500, 'User creation failed.');
+    }
 
     return newUser;
   }

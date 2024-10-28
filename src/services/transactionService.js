@@ -95,6 +95,10 @@ export class TransactionService {
       },
     });
 
+    if (!transaction) {
+      throw new ErrorResponse(500, 'Transfer balance failed.');
+    }
+
     return transaction;
   }
 }

@@ -86,7 +86,7 @@ describe('Account Service', () => {
 
       const accountService = new AccountService();
 
-      const result = await accountService.getAccountById(1);
+      const result = await accountService.getAccountById(account.id);
       expect(result).toEqual(account);
     });
 
@@ -103,18 +103,19 @@ describe('Account Service', () => {
 
   describe('get current balance by ID', () => {
     it('should return current balance by ID', async () => {
-      const account = [
+      const id = 1;
+      const balance = [
         {
           balance: 1000000,
         },
       ];
 
-      prisma.bank_account.findMany.mockResolvedValueOnce(account);
+      prisma.bank_account.findMany.mockResolvedValueOnce(balance);
 
       const accountService = new AccountService();
 
-      const result = await accountService.getCurrentBalanceById(1);
-      expect(result).toEqual(account);
+      const result = await accountService.getCurrentBalanceById(id);
+      expect(result).toEqual(balance);
     });
 
     it('should throw an error if account not found', async () => {
@@ -144,6 +145,21 @@ describe('Account Service', () => {
       const result = await accountService.addAccount(account);
       expect(result).toEqual(account);
     });
+
+    it('should throw an error if account creation fails', async () => {
+      const account = {
+        user_id: 1,
+        bank_name: 'Bank A',
+        bank_account_number: '1234567890',
+        balance: 1000000,
+      };
+
+      prisma.bank_account.create.mockResolvedValueOnce(null);
+
+      const accountService = new AccountService();
+
+      await expect(accountService.addAccount(account)).rejects.toThrow('Bank account creation failed.');
+    });
   });
 
   describe('deposit balance to account', () => {
@@ -164,12 +180,26 @@ describe('Account Service', () => {
 
     it('should throw an error if account not found', async () => {
       const id = 1;
+      const depositAmount = 500000;
 
       prisma.bank_account.findUnique.mockResolvedValueOnce(null);
 
       const accountService = new AccountService();
 
-      await expect(accountService.deposit(id, 500000)).rejects.toThrow(`Account with ID: ${id} not found.`);
+      await expect(accountService.deposit(id, depositAmount)).rejects.toThrow(`Account with ID: ${id} not found.`);
+    });
+
+    it('should throw an error if deposit failed', async () => {
+      const id = 1;
+      const initialBalance = 1000000;
+      const depositAmount = 500000;
+
+      prisma.bank_account.findUnique.mockResolvedValueOnce({ id, balance: initialBalance });
+      prisma.bank_account.update.mockResolvedValueOnce(null);
+
+      const accountService = new AccountService();
+
+      await expect(accountService.deposit(id, depositAmount)).rejects.toThrow('Deposit failed.');
     });
   });
 
@@ -191,12 +221,13 @@ describe('Account Service', () => {
 
     it('should throw an error if account not found', async () => {
       const id = 1;
+      const withdrawAmount = 500000;
 
       prisma.bank_account.findUnique.mockResolvedValueOnce(null);
 
       const accountService = new AccountService();
 
-      await expect(accountService.withdraw(id, 500000)).rejects.toThrow(`Account with ID: ${id} not found.`);
+      await expect(accountService.withdraw(id, withdrawAmount)).rejects.toThrow(`Account with ID: ${id} not found.`);
     });
 
     it('should throw an error if insufficient balance', async () => {
@@ -209,6 +240,19 @@ describe('Account Service', () => {
       const accountService = new AccountService();
 
       await expect(accountService.withdraw(id, withdrawAmount)).rejects.toThrow('Insufficient balance.');
+    });
+
+    it('should throw an error if withdraw failed', async () => {
+      const id = 1;
+      const initialBalance = 1000000;
+      const withdrawAmount = 500000;
+
+      prisma.bank_account.findUnique.mockResolvedValueOnce({ id, balance: initialBalance });
+      prisma.bank_account.update.mockResolvedValueOnce(null);
+
+      const accountService = new AccountService();
+
+      await expect(accountService.withdraw(id, withdrawAmount)).rejects.toThrow('Withdrawal failed.');
     });
   });
 });

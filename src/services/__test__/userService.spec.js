@@ -85,7 +85,7 @@ describe('Users Service', () => {
 
       prisma.user.findUnique.mockResolvedValueOnce(user);
 
-      const result = await UserService.getUserById(1);
+      const result = await UserService.getUserById(user.id);
       expect(result).toEqual(user);
     });
 
@@ -133,6 +133,24 @@ describe('Users Service', () => {
       const userService = new UserService();
 
       await expect(userService.addUser(user)).rejects.toThrow('Email already registered.');
+    });
+
+    it('should throw an error if user creation fails', async () => {
+      const user = {
+        name: 'Mulyono',
+        email: 'mulyono@mail.com',
+        password: 'mulyono',
+        identity_type: 'KTP',
+        identity_number: '882918213',
+        address: 'Jl. Chili Pari 02',
+      };
+
+      prisma.user.findUnique.mockResolvedValueOnce(null);
+      prisma.user.create.mockResolvedValueOnce(null);
+
+      const userService = new UserService();
+
+      await expect(userService.addUser(user)).rejects.toThrow('User creation failed.');
     });
   });
 });

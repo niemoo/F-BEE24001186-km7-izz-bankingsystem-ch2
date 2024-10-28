@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/api/v1/accounts/": {
+    "/": {
       "get": {
         "description": "",
         "responses": {
@@ -23,13 +23,13 @@
       "post": {
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
-    "/api/v1/accounts/{id}": {
+    "/{userId}": {
       "get": {
         "description": "",
         "responses": {
@@ -39,7 +39,25 @@
         }
       }
     },
-    "/api/v1/accounts/{id}/balance": {
+    "/accounts/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/accounts/{id}": {
       "get": {
         "description": "",
         "responses": {
@@ -49,7 +67,17 @@
         }
       }
     },
-    "/api/v1/accounts/{id}/deposit": {
+    "/accounts/{id}/balance": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/accounts/{id}/deposit": {
       "put": {
         "description": "",
         "responses": {
@@ -59,7 +87,7 @@
         }
       }
     },
-    "/api/v1/accounts/{id}/withdraw": {
+    "/accounts/{id}/withdraw": {
       "put": {
         "description": "",
         "responses": {
@@ -69,7 +97,7 @@
         }
       }
     },
-    "/api/v1/users/": {
+    "/transactions/": {
       "get": {
         "description": "",
         "responses": {
@@ -81,41 +109,13 @@
       "post": {
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
-    "/api/v1/users/{userId}": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/v1/transactions/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/v1/transactions/{transactionId}": {
+    "/transactions/{transactionId}": {
       "get": {
         "description": "",
         "responses": {

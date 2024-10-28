@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from '../../swagger-output.json' assert { type: 'json' };
 import errorMiddleware from '../middleware/errorMiddleware.js';
 import accounts from './accountRoute.js';
 import users from './userRoute.js';
@@ -14,4 +16,5 @@ export default (app) => {
   transactions(router);
 
   app.use(errorMiddleware);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 };
