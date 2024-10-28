@@ -1,18 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1730040152062" clover="3.2.0">
-  <project timestamp="1730040152062" name="All files">
-    <metrics statements="16" coveredstatements="16" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4" elements="26" coveredelements="26" complexity="0" loc="16" ncloc="16" packages="2" files="2" classes="2"/>
+<coverage generated="1730089007131" clover="3.2.0">
+  <project timestamp="1730089007131" name="All files">
+    <metrics statements="64" coveredstatements="64" conditionals="28" coveredconditionals="28" methods="13" coveredmethods="13" elements="105" coveredelements="105" complexity="0" loc="64" ncloc="64" packages="2" files="4" classes="4"/>
     <package name="response">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="errorResponse.js" path="D:\Code\binar\challenge\chapter2\src\response\errorResponse.js">
+      <file name="errorResponse.js" path="D:\JAK91\Code\F-BEE24001186-km7-izz-bankingsystem-ch2\src\response\errorResponse.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
+        <line num="3" count="14" type="stmt"/>
+        <line num="4" count="14" type="stmt"/>
       </file>
     </package>
     <package name="services">
-      <metrics statements="14" coveredstatements="14" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
-      <file name="userService.js" path="D:\Code\binar\challenge\chapter2\src\services\userService.js">
+      <metrics statements="62" coveredstatements="62" conditionals="28" coveredconditionals="28" methods="12" coveredmethods="12"/>
+      <file name="accountService.js" path="D:\JAK91\Code\F-BEE24001186-km7-izz-bankingsystem-ch2\src\services\accountService.js">
+        <metrics statements="27" coveredstatements="27" conditionals="12" coveredconditionals="12" methods="6" coveredmethods="6"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="48" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="75" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="94" count="3" type="stmt"/>
+        <line num="100" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="104" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="119" count="1" type="stmt"/>
+      </file>
+      <file name="transactionService.js" path="D:\JAK91\Code\F-BEE24001186-km7-izz-bankingsystem-ch2\src\services\transactionService.js">
+        <metrics statements="21" coveredstatements="21" conditionals="10" coveredconditionals="10" methods="3" coveredmethods="3"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="36" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="50" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="60" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="64" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+      </file>
+      <file name="userService.js" path="D:\JAK91\Code\F-BEE24001186-km7-izz-bankingsystem-ch2\src\services\userService.js">
         <metrics statements="14" coveredstatements="14" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="4" count="1" type="stmt"/>
         <line num="8" count="2" type="stmt"/>

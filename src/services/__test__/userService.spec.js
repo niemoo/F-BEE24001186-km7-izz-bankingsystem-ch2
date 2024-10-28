@@ -14,6 +14,7 @@ jest.mock('@prisma/client', () => {
 
 describe('Users Service', () => {
   let prisma;
+
   beforeEach(() => {
     prisma = new PrismaClient();
   });
@@ -51,7 +52,7 @@ describe('Users Service', () => {
       expect(result).toEqual(users);
     });
 
-    it('should throw error if users not found', async () => {
+    it('should throw an error if users not found', async () => {
       prisma.user.findMany.mockResolvedValueOnce([]);
 
       await expect(UserService.getAllUsers()).rejects.toThrow('Users not found.');
@@ -88,7 +89,7 @@ describe('Users Service', () => {
       expect(result).toEqual(user);
     });
 
-    it('should throw error if user not found', async () => {
+    it('should throw an error if user not found', async () => {
       const id = 1;
 
       prisma.user.findUnique.mockResolvedValueOnce(null);
@@ -117,7 +118,7 @@ describe('Users Service', () => {
       expect(result).toEqual(user);
     });
 
-    it('should throw error if email already registered', async () => {
+    it('should throw an error if email already registered', async () => {
       const user = {
         name: 'Mulyono',
         email: 'mulyono@mail.com',
