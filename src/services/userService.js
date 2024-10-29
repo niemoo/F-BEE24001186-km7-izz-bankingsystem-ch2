@@ -1,19 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
-const db = require('../db/index');
-const { ErrorResponse } = require('../response/errorResponse');
+import { PrismaClient } from '@prisma/client';
+import { ErrorResponse } from '../response/errorResponse.js';
 
 const prisma = new PrismaClient();
 
-class UserService {
-  constructor(name, email, password, identity_type, identity_number, address) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.identity_type = identity_type;
-    this.identity_number = identity_number;
-    this.address = address;
-  }
-
+export class UserService {
   static async getAllUsers() {
     const allUsers = await prisma.user.findMany();
 
@@ -40,28 +30,4 @@ class UserService {
 
     return user;
   }
-
-  async addUser() {
-    const newUser = await prisma.user.create({
-      data: {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        Profile: {
-          create: {
-            identity_type: this.identity_type,
-            identity_number: this.identity_number,
-            address: this.address,
-          },
-        },
-      },
-      include: {
-        Profile: true,
-      },
-    });
-
-    return newUser;
-  }
 }
-
-module.exports = { UserService };

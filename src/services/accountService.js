@@ -1,21 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
-const db = require('../db/index');
-const { ErrorResponse } = require('../response/errorResponse');
+import { PrismaClient } from '@prisma/client';
+import { ErrorResponse } from '../response/errorResponse.js';
 
 const prisma = new PrismaClient();
 
-class AccountService {
-  constructor(user_id, bank_name, bank_account_number, balance, id, amount, created_at, updated_at) {
-    this.id = id;
-    this.user_id = user_id;
-    this.bank_name = bank_name;
-    this.bank_account_number = bank_account_number;
-    this.balance = balance;
-    this.amount = amount;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-  }
-
+export class AccountService {
   async getAllAccounts() {
     const allAccounts = await prisma.bank_account.findMany();
 
@@ -64,72 +52,82 @@ class AccountService {
     return account;
   }
 
-  async addAccount() {
+  async addAccount(data) {
     const newAccount = await prisma.bank_account.create({
       data: {
-        user_id: this.user_id,
-        bank_name: this.bank_name,
-        bank_account_number: this.bank_account_number,
-        balance: this.balance,
+        user_id: data.user_id,
+        bank_name: data.bank_name,
+        bank_account_number: data.bank_account_number,
+        balance: data.balance,
       },
     });
+
+    if (!newAccount) {
+      throw new ErrorResponse(500, 'Bank account creation failed.');
+    }
 
     return newAccount;
   }
 
-  async deposit() {
+  async deposit(id, amount) {
     const account = await prisma.bank_account.findUnique({
       where: {
-        id: parseInt(this.id),
+        id: parseInt(id),
       },
     });
 
     if (!account) {
-      throw new ErrorResponse(404, `Account with ID: ${this.id} not found.`);
+      throw new ErrorResponse(404, `Account with ID: ${id} not found.`);
     }
 
     const updatedAccount = await prisma.bank_account.update({
       where: {
-        id: parseInt(this.id),
+        id: parseInt(id),
       },
       data: {
         balance: {
-          increment: this.amount,
+          increment: amount,
         },
       },
     });
 
+    if (!updatedAccount) {
+      throw new ErrorResponse(500, 'Failed to deposit to an account.');
+    }
+
     return updatedAccount;
   }
 
-  async withdraw() {
+  async withdraw(id, amount) {
     const account = await prisma.bank_account.findUnique({
       where: {
-        id: parseInt(this.id),
+        id: parseInt(id),
       },
     });
 
     if (!account) {
-      throw new ErrorResponse(404, `Account with ID: ${this.id} not found.`);
+      throw new ErrorResponse(404, `Account with ID: ${id} not found.`);
     }
 
-    if (account.balance < this.amount) {
+    if (account.balance < amount) {
       throw new ErrorResponse(400, 'Insufficient balance.');
     }
 
     const updatedAccount = await prisma.bank_account.update({
       where: {
-        id: parseInt(this.id),
+        id: parseInt(id),
       },
       data: {
         balance: {
-          decrement: this.amount,
+          decrement: amount,
         },
       },
     });
 
+    if (!updatedAccount) {
+      throw new ErrorResponse(500, 'Withdrawal failed.');
+    }
+
     return updatedAccount;
   }
 }
-
-module.exports = { AccountService };

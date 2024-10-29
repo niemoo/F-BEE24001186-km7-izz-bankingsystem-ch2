@@ -1,14 +1,6 @@
-const joi = require('joi');
-const { AccountService } = require('../services/accountService');
+import { AccountService } from '../services/accountService.js';
 
-const schema = joi.object({
-  user_id: joi.number().required(),
-  bank_name: joi.string().required(),
-  bank_account_number: joi.string().required(),
-  balance: joi.number().required(),
-});
-
-class AccountController {
+export class AccountController {
   constructor() {
     this.accountService = new AccountService();
   }
@@ -54,16 +46,11 @@ class AccountController {
 
   async addAccount(req, res, next) {
     try {
-      const { value, error } = schema.validate(req.body);
+      const value = req.body;
 
-      if (error) {
-        error.isJoi = true;
-        return next(error);
-      }
+      const newAccount = new AccountService();
 
-      const newAccount = new AccountService(value.user_id, value.bank_name, value.bank_account_number, value.balance);
-
-      const data = await newAccount.addAccount();
+      const data = await newAccount.addAccount(value);
 
       res.status(201).json({
         data,
@@ -79,9 +66,9 @@ class AccountController {
       const { id } = req.params;
       const { amount } = req.body;
 
-      const accountService = new AccountService(null, null, null, null, id, amount);
+      const accountService = new AccountService();
 
-      const updatedAccount = await accountService.deposit();
+      const updatedAccount = await accountService.deposit(id, amount);
 
       res.status(200).json({
         data: updatedAccount,
@@ -97,9 +84,9 @@ class AccountController {
       const { id } = req.params;
       const { amount } = req.body;
 
-      const accountService = new AccountService(null, null, null, null, id, amount);
+      const accountService = new AccountService();
 
-      const updatedAccount = await accountService.withdraw();
+      const updatedAccount = await accountService.withdraw(id, amount);
 
       res.status(200).json({
         data: updatedAccount,
@@ -110,5 +97,3 @@ class AccountController {
     }
   }
 }
-
-module.exports = { AccountController };

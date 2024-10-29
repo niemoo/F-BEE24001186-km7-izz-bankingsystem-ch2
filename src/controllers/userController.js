@@ -1,16 +1,6 @@
-const joi = require('joi');
-const { UserService } = require('../services/userService');
+import { UserService } from '../services/userService.js';
 
-const schema = joi.object({
-  name: joi.string().required(),
-  email: joi.string().email().required(),
-  password: joi.string().required(),
-  identity_type: joi.string().required(),
-  identity_number: joi.string().required(),
-  address: joi.string().required(),
-});
-
-class UserController {
+export class UserController {
   constructor() {
     this.userService = new UserService();
   }
@@ -27,35 +17,12 @@ class UserController {
 
   async getUserById(req, res, next) {
     try {
-      const { userId } = req.params;
-      const data = await UserService.getUserById(userId);
+      const { id } = req.params;
+      const data = await UserService.getUserById(id);
 
-      res.status(200).json({ data, message: `Successfully get user data by ID: ${userId}.` });
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  async addUser(req, res, next) {
-    try {
-      const { value, error } = schema.validate(req.body);
-
-      if (error) {
-        error.isJoi = true;
-        return next(error);
-      }
-
-      const { name, email, password, identity_type, identity_number, address } = value;
-
-      const newUser = new UserService(name, email, password, identity_type, identity_number, address);
-
-      const data = await newUser.addUser();
-
-      res.status(201).json({ data, message: 'Successfully created a new user.' });
+      res.status(200).json({ data, message: `Successfully get user data by ID: ${id}.` });
     } catch (err) {
       next(err);
     }
   }
 }
-
-module.exports = { UserController };

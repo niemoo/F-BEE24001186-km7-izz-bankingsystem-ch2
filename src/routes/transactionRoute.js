@@ -1,16 +1,16 @@
-const express = require('express');
-const { TransactionController } = require('../controllers/transactionController.js');
+import express from 'express';
+import authMiddleware from '../middleware/authMiddleware.js';
+import { TransactionController } from '../controllers/transactionController.js';
+import { TransactionValidation } from '../middleware/validations/transactionController.js';
 
-module.exports = (app) => {
+export default (app) => {
   const router = express.Router();
-
+  app.use('/transactions', router);
   const transactionController = new TransactionController();
 
-  app.use('/api/v1/transactions', router);
+  router.get('/', authMiddleware, transactionController.getAllTransactions.bind(transactionController));
 
-  router.get('/', transactionController.getAllTransactions.bind(transactionController));
+  router.get('/:id', authMiddleware, transactionController.getTransactionById.bind(transactionController));
 
-  router.get('/:transactionId', transactionController.getTransactionById.bind(transactionController));
-
-  router.post('/', transactionController.transferBalance.bind(transactionController));
+  router.post('/', TransactionValidation.transferBalanceValidation, transactionController.transferBalance.bind(transactionController));
 };

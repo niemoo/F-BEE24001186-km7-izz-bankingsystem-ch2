@@ -1,4 +1,4 @@
-const { notNumberError, negativeAmountError, notEnoughBalanceError } = require('./error_service');
+import { notNumberError, negativeAmountError, notEnoughBalanceError } from './error_service.js';
 
 class BankAccount {
   constructor(accountBalance) {

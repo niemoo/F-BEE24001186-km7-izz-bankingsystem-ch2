@@ -1,0 +1,540 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Binar Challenge",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "noauthAuth": {
+        "type": "http",
+        "scheme": "noauth"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Accounts"
+    },
+    {
+      "name": "Transactions"
+    },
+    {
+      "name": "Users"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "kipli@mail.com",
+                  "password": "kipli123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "214"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"d6-T1FitBTaMo1eYadw/lydkOa3YKE\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 29 Oct 2024 14:40:59 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "data": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6ImZ1ZnVmYWZhIiwiaWF0IjoxNzMwMjEyODU5LCJleHAiOjE3MzAyOTkyNTl9.638i_c6fgE3iRA_9QCpVe2dJ8RsWWXK5CnFdLSOnVXQ"
+                  },
+                  "message": "Successfully login."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Gege Akutami",
+                  "email": "gege@mail.com",
+                  "password": "gege123",
+                  "identity_type": "KTP",
+                  "identity_number": "0987654324",
+                  "address": "Jl. Hambalang No. 2, Bogor"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "459"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"1cb-vn0yLNoUFv2MUWt7E+s6UgEQedU\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 29 Oct 2024 14:47:43 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "data": {
+                    "id": 6,
+                    "name": "Gege Akutami",
+                    "email": "gege@mail.com",
+                    "password": "$2b$10$Ltbq9MzrGBdZ/1ADDRt7aO.JQ2WllOO.J5sgvrtmWk1lwRFGpF6Iq",
+                    "created_at": "2024-10-29T14:47:43.372Z",
+                    "updated_at": null,
+                    "deleted_at": null,
+                    "Profile": [
+                      {
+                        "id": 6,
+                        "user_id": 6,
+                        "identity_type": "KTP",
+                        "identity_number": "0987654324",
+                        "address": "Jl. Hambalang No. 2, Bogor",
+                        "created_at": "2024-10-29T14:47:43.372Z",
+                        "updated_at": null,
+                        "deleted_at": null
+                      }
+                    ]
+                  },
+                  "message": "Successfully created a new user."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts": {
+      "get": {
+        "tags": ["Accounts"],
+        "summary": "Get All Accounts",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "746"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"2ea-pHMTi+Sq2eAmmXt2yxpMJpLZLAg\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 29 Oct 2024 15:25:35 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 3,
+                      "user_id": 2,
+                      "bank_name": "BNI",
+                      "bank_account_number": "998139819822",
+                      "balance": "1000000",
+                      "created_at": "2024-10-27T10:23:36.159Z",
+                      "updated_at": null,
+                      "deleted_at": null
+                    },
+                    {
+                      "id": 4,
+                      "user_id": 1,
+                      "bank_name": "BRI",
+                      "bank_account_number": "998139819822",
+                      "balance": "1000000",
+                      "created_at": "2024-10-29T14:16:28.047Z",
+                      "updated_at": null,
+                      "deleted_at": null
+                    },
+                    {
+                      "id": 2,
+                      "user_id": 3,
+                      "bank_name": "BCA",
+                      "bank_account_number": "998139819823",
+                      "balance": "1011000",
+                      "created_at": "2024-10-27T10:23:24.773Z",
+                      "updated_at": null,
+                      "deleted_at": null
+                    },
+                    {
+                      "id": 1,
+                      "user_id": 1,
+                      "bank_name": "BRI",
+                      "bank_account_number": "998139819821",
+                      "balance": "1094000",
+                      "created_at": "2024-10-27T09:34:24.211Z",
+                      "updated_at": null,
+                      "deleted_at": null
+                    }
+                  ],
+                  "message": "Successfully get all accounts data."
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Accounts"],
+        "summary": "Add New Account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "user_id": 1,
+                  "bank_name": "BRI",
+                  "bank_account_number": "998139819822",
+                  "balance": 1000000
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/1": {
+      "get": {
+        "tags": ["Accounts"],
+        "summary": "Get Account by Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/1/deposit": {
+      "put": {
+        "tags": ["Accounts"],
+        "summary": "Deposit Balance",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "amount": 10000
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/1/withdraw": {
+      "put": {
+        "tags": ["Accounts"],
+        "summary": "Withdraw Balance",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "amount": 10000
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transactions": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get All Transactions",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Transfer Balance",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "source_account_id": 1,
+                  "destination_account_id": 2,
+                  "amount": 1000
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "noauthAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/1": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get Request by Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get All Users",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/1": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get User by Id",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
