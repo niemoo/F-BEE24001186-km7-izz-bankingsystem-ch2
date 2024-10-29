@@ -122,49 +122,4 @@ describe('User Controller', () => {
       expect(next).toHaveBeenCalledWith(new Error(`User with ID: ${id} not found.`));
     });
   });
-
-  describe('add a new user', () => {
-    it('should create a new user and return a success message', async () => {
-      const user = {
-        name: 'Mulyono',
-        email: 'mulyono@mail.com',
-        password: 'mulyono',
-        identity_type: 'KTP',
-        identity_number: '882918213',
-        address: 'Jl. Chili Pari 02',
-      };
-
-      req.body = user;
-      prisma.user.create.mockResolvedValueOnce(user);
-
-      await userController.addUser(req, res, next);
-
-      expect(res.status).toHaveBeenCalledWith(201);
-      expect(res.json).toHaveBeenCalledWith({
-        data: user,
-        message: 'Successfully created a new user.',
-      });
-    });
-
-    it('should throw an error if failed to create a new user', async () => {
-      const user = {
-        name: 'Mulyono',
-        email: 'mulyono@mail.com',
-        password: 'mulyono',
-        identity_type: 'KTP',
-        identity_number: '882918213',
-        address: 'Jl. Chili Pari 02',
-      };
-
-      req.body = user;
-
-      const errorMessage = new Error('Failed to create user.');
-      prisma.user.create.mockRejectedValueOnce(errorMessage);
-
-      await userController.addUser(req, res, next);
-
-      expect(next).toHaveBeenCalledWith(expect.any(Error));
-      expect(next).toHaveBeenCalledWith(errorMessage);
-    });
-  });
 });

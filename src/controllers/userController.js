@@ -25,18 +25,4 @@ export class UserController {
       next(err);
     }
   }
-
-  async addUser(req, res, next) {
-    try {
-      const value = req.body;
-
-      const newUser = new UserService();
-
-      const data = await newUser.addUser(value);
-
-      res.status(201).json({ data, message: 'Successfully created a new user.' });
-    } catch (err) {
-      next(err);
-    }
-  }
 }

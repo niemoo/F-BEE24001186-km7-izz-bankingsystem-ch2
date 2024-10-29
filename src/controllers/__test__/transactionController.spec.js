@@ -3,6 +3,11 @@ import { PrismaClient } from '@prisma/client';
 
 jest.mock('@prisma/client', () => {
   const mockPrismaClient = {
+    bank_account: {
+      create: jest.fn(),
+      findMany: jest.fn(),
+      findUnique: jest.fn(),
+    },
     transaction: {
       create: jest.fn(),
       findMany: jest.fn(),
@@ -71,7 +76,7 @@ describe('Transaction Controller', () => {
 
       await transactionController.getAllTransactions(req, res, next);
 
-      expect(next).toHaveBeenCalled(new Error('Transactions not found.'));
+      expect(next).toHaveBeenCalledWith(new Error('Transactions not found.'));
     });
   });
 
@@ -79,17 +84,22 @@ describe('Transaction Controller', () => {
     it('should return transaction data by ID', async () => {
       const transaction = {
         id: 1,
-        source_account_id: 1,
-        destination_account_id: 2,
         amount: 100000,
-        created_at: '2024-10-27T09:11:25.866Z',
-        updated_at: null,
-        deleted_at: null,
+        sender: {
+          account_id: 1,
+          name: 'Mulyono',
+          bank_name: 'Source Bank',
+        },
+        destinationAccount: {
+          id: 2,
+          user: 'Fufufafa',
+          bank_name: 'Destination Bank',
+        },
       };
 
       prisma.transaction.findUnique.mockResolvedValueOnce(transaction);
 
-      req.params.transactionId = transaction.id;
+      req.params.id = transaction.id;
 
       await transactionController.getTransactionById(req, res, next);
 
@@ -106,11 +116,46 @@ describe('Transaction Controller', () => {
 
       req.params.id = id;
 
-      req.params.transactionId = 1;
-
       await transactionController.getTransactionById(req, res, next);
 
-      expect(next).toHaveBeenCalled(new Error(`Transaction with ID: ${id} not found.`));
+      expect(next).toHaveBeenCalledWith(new Error(`Transaction with ID: ${id} not found.`));
+    });
+  });
+
+  describe('transfer balance', () => {
+    it('should transfer balance', async () => {
+      const { source_account_id, destination_account_id, amount } = req.body;
+
+      const transaction = {
+        id: 1,
+        source_account_id,
+        destination_account_id,
+        amount,
+        created_at: '2024-10-27T09:11:25.866Z',
+        updated_at: null,
+        deleted_at: null,
+      };
+
+      prisma.transaction.create.mockResolvedValueOnce(transaction);
+
+      await transactionController.transferBalance(req, res, next);
+
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        data: transaction,
+        message: 'Successfully transfer balance.',
+      });
+    });
+
+    it('should throw an error if failed to transfer balance', async () => {
+      const { source_account_id, destination_account_id, amount } = req.body;
+
+      prisma.bank_account.findUnique.mockResolvedValueOnce({ id: source_account_id, balance: 500 }).mockResolvedValueOnce({ id: destination_account_id, balance: 200 });
+      prisma.transaction.create.mockRejectedValueOnce(new Error('Transfer balance failed.'));
+
+      await transactionController.transferBalance(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(new Error('Transfer balance failed.'));
     });
   });
 });

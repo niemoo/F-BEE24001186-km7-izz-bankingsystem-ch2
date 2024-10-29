@@ -5,6 +5,20 @@ export class AuthController {
     this.authService = new AuthService();
   }
 
+  async register(req, res, next) {
+    try {
+      const value = req.body;
+
+      const newUser = new AuthService();
+
+      const data = await newUser.register(value);
+
+      res.status(201).json({ data, message: 'Successfully created a new user.' });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async login(req, res, next) {
     try {
       const value = req.body;
@@ -15,9 +29,7 @@ export class AuthController {
         message: 'Successfully login.',
       });
     } catch (err) {
-      res.status(err.statusCode || 500).json({
-        message: err.message,
-      });
+      next(err);
     }
   }
 }

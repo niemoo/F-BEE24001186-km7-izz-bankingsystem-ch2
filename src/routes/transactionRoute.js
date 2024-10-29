@@ -1,4 +1,5 @@
 import express from 'express';
+import authMiddleware from '../middleware/authMiddleware.js';
 import { TransactionController } from '../controllers/transactionController.js';
 import { TransactionValidation } from '../middleware/validations/transactionController.js';
 
@@ -7,9 +8,9 @@ export default (app) => {
   app.use('/transactions', router);
   const transactionController = new TransactionController();
 
-  router.get('/', transactionController.getAllTransactions.bind(transactionController));
+  router.get('/', authMiddleware, transactionController.getAllTransactions.bind(transactionController));
 
-  router.get('/:transactionId', transactionController.getTransactionById.bind(transactionController));
+  router.get('/:id', authMiddleware, transactionController.getTransactionById.bind(transactionController));
 
   router.post('/', TransactionValidation.transferBalanceValidation, transactionController.transferBalance.bind(transactionController));
 };

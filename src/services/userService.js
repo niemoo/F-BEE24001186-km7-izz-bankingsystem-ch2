@@ -30,40 +30,4 @@ export class UserService {
 
     return user;
   }
-
-  async addUser(data) {
-    const checkUser = await prisma.user.findUnique({
-      where: {
-        email: data.email,
-      },
-    });
-
-    if (checkUser) {
-      throw new ErrorResponse(409, 'Email already registered.');
-    }
-
-    const newUser = await prisma.user.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        Profile: {
-          create: {
-            identity_type: data.identity_type,
-            identity_number: data.identity_number,
-            address: data.address,
-          },
-        },
-      },
-      include: {
-        Profile: true,
-      },
-    });
-
-    if (!newUser) {
-      throw new ErrorResponse(500, 'User creation failed.');
-    }
-
-    return newUser;
-  }
 }

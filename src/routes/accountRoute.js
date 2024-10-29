@@ -10,7 +10,7 @@ export default (app) => {
 
   router.get('/', authMiddleware, accountController.getAllAccounts.bind(accountController));
 
-  router.get('/:id', accountController.getAccountById.bind(accountController));
+  router.get('/:id', authMiddleware, accountController.getAccountById.bind(accountController));
 
   router.get('/:id/balance', accountController.getCurrentBalanceById.bind(accountController));
 
