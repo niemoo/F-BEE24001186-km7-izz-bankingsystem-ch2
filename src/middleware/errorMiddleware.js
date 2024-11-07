@@ -1,6 +1,6 @@
 import { ErrorResponse } from '../response/errorResponse.js';
 
-const errorMiddleware = (err, req, res, next) => {
+const errorMiddleware = (err, req, res, _next) => {
   if (err instanceof ErrorResponse) {
     return res.status(err.status).json({
       error: err.message,

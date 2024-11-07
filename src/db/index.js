@@ -1,7 +1,4 @@
-import { PrismaClient } from '@prisma/client';
 import { Pool } from 'pg';
-
-const prisma = new PrismaClient();
 
 const pool = new Pool({
   host: 'localhost',
