@@ -65,7 +65,7 @@ export class TransactionService {
       throw new ErrorResponse(400, 'Insufficient balance.');
     }
 
-    const updatedSourceAccount = await prisma.bank_account.update({
+    await prisma.bank_account.update({
       where: {
         id: parseInt(source_account_id),
       },
@@ -76,7 +76,7 @@ export class TransactionService {
       },
     });
 
-    const updatedDestinationAccount = await prisma.bank_account.update({
+    await prisma.bank_account.update({
       where: {
         id: parseInt(destination_account_id),
       },

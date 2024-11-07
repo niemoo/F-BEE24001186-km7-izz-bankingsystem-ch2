@@ -5,7 +5,8 @@ class BankAccount {
     this.accountBalance = accountBalance;
   }
 
-  #formattedBalance() {
+  // Private method for formatted balance
+  formattedBalance() {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(this.accountBalance);
   }
 
@@ -18,7 +19,7 @@ class BankAccount {
           reject(new negativeAmountError('Input cannot be less than 0.'));
         } else if (amount > 0) {
           this.accountBalance += amount;
-          resolve(`Balance added successfully.\nYour balance now : ${this.#formattedBalance()}`);
+          resolve(`Balance added successfully.\nYour balance now : ${this.formattedBalance()}`);
         }
       }, 1000);
     });
@@ -33,7 +34,7 @@ class BankAccount {
           reject(new negativeAmountError('Input cannot be less than 0.'));
         } else if (amount > 0 && amount <= this.accountBalance) {
           this.accountBalance -= amount;
-          resolve(`Withdraw money successfully.\nYour balance now : Rp ${this.#formattedBalance()}`);
+          resolve(`Withdraw money successfully.\nYour balance now : ${this.formattedBalance()}`);
         } else {
           reject(new notEnoughBalanceError('Insufficient balance.'));
         }
@@ -44,10 +45,10 @@ class BankAccount {
   balanceCheck() {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(`Your balance : ${this.#formattedBalance()}`);
+        resolve(`Your balance : ${this.formattedBalance()}`);
       }, 1000);
     });
   }
 }
 
-module.exports = { BankAccount };
+export { BankAccount };
