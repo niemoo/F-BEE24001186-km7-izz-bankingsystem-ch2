@@ -30,4 +30,29 @@ export class UserService {
 
     return user;
   }
+
+  static async addImageProfile(userId, url, title, desc) {
+    const userProfile = await prisma.profile.findFirst({
+      where: {
+        user_id: parseInt(userId),
+      },
+    });
+
+    if (!userProfile) {
+      throw new Error(`Profile for user ID ${userId} not found`);
+    }
+
+    const updatedProfile = await prisma.profile.update({
+      where: {
+        id: userProfile.id,
+      },
+      data: {
+        image: url,
+        title: title,
+        description: desc,
+      },
+    });
+
+    return updatedProfile;
+  }
 }

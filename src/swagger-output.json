@@ -535,6 +535,43 @@
           }
         }
       }
+    },
+    "/api/v1/users/1/image": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "New Request",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Gambar Profil"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Ini gambar profil"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
     }
   }
 }

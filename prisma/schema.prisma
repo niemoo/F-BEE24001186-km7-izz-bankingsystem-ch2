@@ -46,9 +46,12 @@ model Bank_account {
 model Profile {
   id              Int       @id @default(autoincrement())
   user_id         Int
-  identity_type   String
-  identity_number String
-  address         String
+  identity_type   String?
+  identity_number String?
+  address         String?
+  image           String?
+  title           String?
+  description     String?
   created_at      DateTime  @default(now())
   updated_at      DateTime?
   deleted_at      DateTime?
