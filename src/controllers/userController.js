@@ -68,7 +68,7 @@ export class UserController {
           const { title = 'Untitled', description = 'No description provided' } = req.body;
 
           try {
-            const data = await UserService.addImageProfile(id, modifiedUrl, title, description);
+            await UserService.addImageProfile(id, modifiedUrl, title, description);
             return res.json({ status: 'success', url: modifiedUrl, message: 'Successfully upload image' });
           } catch (serviceError) {
             next(serviceError);
