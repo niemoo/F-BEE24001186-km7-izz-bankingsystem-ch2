@@ -3,8 +3,8 @@ import ImageKit from 'imagekit';
 
 export const imageKit = new ImageKit({
   publicKey: 'public_wd1C4Blc3kuzLXF9kc49txjPzEY=',
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+  privateKey: 'private_Q3904+wBxW5O4xZzrzBmaP1RXgo=',
+  urlEndpoint: 'https://ik.imagekit.io/niemoo/',
 });
 
 const fileStorage = multer.memoryStorage();
