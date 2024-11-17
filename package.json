@@ -4,11 +4,12 @@
   "description": "- **Ensure Required Software:** Make sure you have Node.js installed.\r - **Clone the Repository:** Clone this repository to your local machine.\r - **Run the Server:** Start the JavaScript development server by executing:",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js",
+    "dev": "nodemon ./src/index.js && npm run sentry:sourcemaps",
     "start": "node ./src/index.js",
     "test": "jest",
     "swagger": "node ./src/swagger.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org izzan-abdul-aziz --project node-express ./src/libs/sentry.js && sentry-cli sourcemaps upload --org izzan-abdul-aziz --project node-express ./src/libs/sentry.js"
   },
   "type": "module",
   "keywords": [],
@@ -17,6 +18,9 @@
   "dependencies": {
     "@prisma/adapter-pg": "^5.21.0",
     "@prisma/client": "^5.21.0",
+    "@sentry/cli": "^2.38.2",
+    "@sentry/node": "^8.38.0",
+    "@sentry/profiling-node": "^8.38.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

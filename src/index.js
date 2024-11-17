@@ -1,3 +1,5 @@
+import './libs/sentry.js';
+import * as Sentry from '@sentry/node';
 import { createServer } from 'node:http';
 import { Server } from 'socket.io';
 import express from 'express';
@@ -41,6 +43,19 @@ const main = () => {
     socket.on('disconnect', () => {
       console.log('User disconnected: ', socket.id);
     });
+  });
+
+  Sentry.setupExpressErrorHandler(app);
+
+  app.use(function onError(err, req, res, next) {
+    // The error id is attached to `res.sentry` to be returned
+    // and optionally displayed to the user for support.
+    res.statusCode = 500;
+    res.end(res.sentry + '\n');
+  });
+
+  app.get('/debug-sentry', function mainHandler(req, res) {
+    throw new Error('My first Sentry error!');
   });
 
   server.listen(process.env.PORT, () => {
