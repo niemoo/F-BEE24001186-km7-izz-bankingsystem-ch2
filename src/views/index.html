@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notifications</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>Notifications</h1>
+    <div id="notification-container"></div>
+
+    <script>
+      var socket = io();
+
+      socket.on('notifications', function (data) {
+        console.log(data);
+        var notificationContainer = document.getElementById('notification-container');
+        var notification = document.createElement('div');
+        notification.textContent = data.message;
+        notificationContainer.appendChild(notification);
+      });
+    </script>
+  </body>
+</html>

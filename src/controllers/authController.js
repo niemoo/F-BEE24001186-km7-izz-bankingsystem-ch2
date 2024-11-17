@@ -1,3 +1,4 @@
+import { Notification } from '../libs/socket.js';
 import { AuthService } from '../services/authService.js';
 
 export class AuthController {
@@ -10,6 +11,7 @@ export class AuthController {
       const value = req.body;
 
       const newUser = new AuthService();
+      await Notification.push(`New user with email : ${value.email} is registered.`);
 
       const data = await newUser.register(value);
 

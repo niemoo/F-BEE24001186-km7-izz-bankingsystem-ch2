@@ -2,8 +2,50 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import { ErrorResponse } from '../response/errorResponse.js';
+import nodemailer from 'nodemailer';
+import Handlebars from 'handlebars';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const templateFilePath = path.resolve(__dirname, '../views/register.html');
+const templateSource = fs.readFileSync(templateFilePath, 'utf8');
+const template = Handlebars.compile(templateSource);
+const htmlToSend = template();
+
+const transporter = nodemailer.createTransport({
+  port: 465,
+  secure: true,
+  service: 'gmail',
+  host: 'smtp.gmail.com',
+  auth: {
+    user: 'izzanabdul123@gmail.com',
+    pass: 'gxxr zgzg xqwu zsup',
+  },
+});
 
 const prisma = new PrismaClient();
+
+const emailController = (email) => {
+  const mailOptions = {
+    from: 'izzanabdul123@gmail.com',
+    to: email,
+    subject: 'test email',
+    text: 'Ayo ayo ganyang fufufafa',
+    html: htmlToSend,
+  };
+
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      console.log('success send email');
+    }
+  });
+};
 
 export class AuthService {
   async register(data) {
@@ -41,6 +83,8 @@ export class AuthService {
     if (!newUser) {
       throw new ErrorResponse(500, 'User registration failed.');
     }
+
+    emailController(data.email);
 
     return newUser;
   }
