@@ -6,12 +6,13 @@ import nodemailer from 'nodemailer';
 import Handlebars from 'handlebars';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-const templateFilePath = path.resolve(__dirname, '../views/register.html');
+// const templateFilePathh = path.resolve(__dirname, '../views/register.html');
+const templateFilePath = path.join(process.cwd(), 'src/views', 'register.html');
 const templateSource = fs.readFileSync(templateFilePath, 'utf8');
 const template = Handlebars.compile(templateSource);
 const htmlToSend = template();
@@ -34,11 +35,10 @@ const emailController = (email) => {
     from: 'izzanabdul123@gmail.com',
     to: email,
     subject: 'test email',
-    text: 'Ayo ayo ganyang fufufafa',
     html: htmlToSend,
   };
 
-  transporter.sendMail(mailOptions, (err, info) => {
+  transporter.sendMail(mailOptions, (err, _info) => {
     if (err) {
       console.error(err.message);
     } else {
@@ -105,7 +105,7 @@ export class AuthService {
       throw new ErrorResponse(400, 'Password is incorrect.');
     }
 
-    const token = jwt.sign({ id: user.id }, 'asddas', {
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: '1d',
     });
 

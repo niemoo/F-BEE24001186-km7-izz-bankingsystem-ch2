@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1730730878111" clover="3.2.0">
-  <project timestamp="1730730878111" name="All files">
-    <metrics statements="142" coveredstatements="123" conditionals="42" coveredconditionals="42" methods="27" coveredmethods="24" elements="211" coveredelements="189" complexity="0" loc="142" ncloc="142" packages="3" files="8" classes="8"/>
+<coverage generated="1732017212278" clover="3.2.0">
+  <project timestamp="1732017212278" name="All files">
+    <metrics statements="158" coveredstatements="121" conditionals="50" coveredconditionals="42" methods="28" coveredmethods="20" elements="236" coveredelements="183" complexity="0" loc="158" ncloc="158" packages="3" files="6" classes="6"/>
     <package name="controllers">
-      <metrics statements="57" coveredstatements="38" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="10"/>
+      <metrics statements="35" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="5"/>
       <file name="accountController.js" path="D:\Code\binar\challenge\chapter2\src\controllers\accountController.js">
         <metrics statements="35" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="5"/>
         <line num="5" count="8" type="stmt"/>
@@ -42,45 +42,17 @@
         <line num="91" count="0" type="stmt"/>
         <line num="96" count="0" type="stmt"/>
       </file>
-      <file name="authController.js" path="D:\Code\binar\challenge\chapter2\src\controllers\authController.js">
-        <metrics statements="12" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-      </file>
-      <file name="userController.js" path="D:\Code\binar\challenge\chapter2\src\controllers\userController.js">
-        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-        <line num="5" count="4" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-      </file>
     </package>
     <package name="response">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="errorResponse.js" path="D:\Code\binar\challenge\chapter2\src\response\errorResponse.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="3" count="26" type="stmt"/>
-        <line num="4" count="26" type="stmt"/>
+        <line num="3" count="24" type="stmt"/>
+        <line num="4" count="24" type="stmt"/>
       </file>
     </package>
     <package name="services">
-      <metrics statements="83" coveredstatements="83" conditionals="42" coveredconditionals="42" methods="13" coveredmethods="13"/>
+      <metrics statements="121" coveredstatements="98" conditionals="50" coveredconditionals="42" methods="20" coveredmethods="14"/>
       <file name="accountService.js" path="D:\Code\binar\challenge\chapter2\src\services\accountService.js">
         <metrics statements="33" coveredstatements="33" conditionals="18" coveredconditionals="18" methods="6" coveredmethods="6"/>
         <line num="4" count="2" type="stmt"/>
@@ -118,25 +90,37 @@
         <line num="131" count="1" type="stmt"/>
       </file>
       <file name="authService.js" path="D:\Code\binar\challenge\chapter2\src\services\authService.js">
-        <metrics statements="18" coveredstatements="18" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="10" count="5" type="stmt"/>
-        <line num="16" count="5" type="cond" truecount="2" falsecount="0"/>
+        <metrics statements="30" coveredstatements="27" conditionals="10" coveredconditionals="8" methods="4" coveredmethods="3"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
-        <line num="20" count="4" type="stmt"/>
-        <line num="21" count="4" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
-        <line num="41" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
-        <line num="49" count="3" type="stmt"/>
-        <line num="55" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="59" count="2" type="stmt"/>
-        <line num="60" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="61" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="58" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="83" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="93" count="3" type="stmt"/>
+        <line num="99" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
+        <line num="104" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
       </file>
       <file name="transactionService.js" path="D:\Code\binar\challenge\chapter2\src\services\transactionService.js">
         <metrics statements="23" coveredstatements="23" conditionals="12" coveredconditionals="12" methods="3" coveredmethods="3"/>
@@ -165,16 +149,42 @@
         <line num="102" count="1" type="stmt"/>
       </file>
       <file name="userService.js" path="D:\Code\binar\challenge\chapter2\src\services\userService.js">
-        <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="8" count="4" type="stmt"/>
-        <line num="10" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="27" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
+        <metrics statements="35" coveredstatements="15" conditionals="10" coveredconditionals="4" methods="7" coveredmethods="2"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="54" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="71" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="85" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="120" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
       </file>
     </package>
   </project>

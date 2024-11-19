@@ -45,21 +45,21 @@ const main = () => {
     });
   });
 
+  app.get('/debug-sentry', function mainHandler(_req, _res) {
+    throw new Error('My first Sentry error!');
+  });
+
   Sentry.setupExpressErrorHandler(app);
 
-  app.use(function onError(err, req, res, next) {
+  app.use(function onError(err, _req, res, _next) {
     // The error id is attached to `res.sentry` to be returned
     // and optionally displayed to the user for support.
     res.statusCode = 500;
     res.end(res.sentry + '\n');
   });
 
-  app.get('/debug-sentry', function mainHandler(req, res) {
-    throw new Error('My first Sentry error!');
-  });
-
   server.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
+    console.log(`Server running on port ${process.env.PORT}`);
   });
 };
 
