@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "localhost:3000"
+      "url": "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com"
     }
   ],
   "components": {
@@ -36,7 +36,7 @@
     }
   ],
   "paths": {
-    "localhost:3000/api/v1/auth/login": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/auth/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "Login User",
@@ -117,7 +117,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/auth/register": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/auth/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "Register User",
@@ -220,7 +220,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/accounts": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/accounts": {
       "get": {
         "tags": ["Accounts"],
         "summary": "Get All Accounts",
@@ -368,7 +368,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/accounts/1": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/accounts/1": {
       "get": {
         "tags": ["Accounts"],
         "summary": "Get Account by Id",
@@ -387,7 +387,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/accounts/1/deposit": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/accounts/1/deposit": {
       "put": {
         "tags": ["Accounts"],
         "summary": "Deposit Balance",
@@ -413,7 +413,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/accounts/1/withdraw": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/accounts/1/withdraw": {
       "put": {
         "tags": ["Accounts"],
         "summary": "Withdraw Balance",
@@ -439,7 +439,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/transactions": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/transactions": {
       "get": {
         "tags": ["Transactions"],
         "summary": "Get All Transactions",
@@ -489,7 +489,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/transactions/1": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/transactions/1": {
       "get": {
         "tags": ["Transactions"],
         "summary": "Get Request by Id",
@@ -508,7 +508,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/users": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/users": {
       "get": {
         "tags": ["Users"],
         "summary": "Get All Users",
@@ -522,7 +522,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/users/7": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/users/7": {
       "get": {
         "tags": ["Users"],
         "summary": "Get User by Id",
@@ -536,7 +536,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/users/7/image": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/users/7/image": {
       "put": {
         "tags": ["Users"],
         "summary": "Update Image Profile",
@@ -573,7 +573,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/users/forget-password": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/users/forget-password": {
       "post": {
         "tags": ["Users"],
         "summary": "Forget Password",
@@ -599,7 +599,7 @@
         }
       }
     },
-    "localhost:3000/api/v1/users/reset-password": {
+    "ec2-52-221-183-19.ap-southeast-1.compute.amazonaws.com/api/v1/users/reset-password": {
       "put": {
         "tags": ["Users"],
         "summary": "Reset Password",
