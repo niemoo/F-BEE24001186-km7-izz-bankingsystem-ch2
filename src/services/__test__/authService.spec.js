@@ -106,7 +106,7 @@ describe('Auth Service', () => {
       expect(result).toEqual({ token: 'mockToken' });
       expect(prisma.user.findUnique).toHaveBeenCalledWith({ where: { email: loginData.email } });
       expect(bcrypt.compare).toHaveBeenCalledWith(loginData.password, user.password);
-      expect(jwt.sign).toHaveBeenCalledWith({ id: user.id }, 'asddas', { expiresIn: '1d' });
+      expect(jwt.sign).toHaveBeenCalledWith({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     });
 
     it('should throw an error if user not found', async () => {

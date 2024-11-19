@@ -1,5 +1,6 @@
 import { UserService } from '../services/userService.js';
 import { imageKit } from '../middleware/fileUploadMiddleware.js';
+import { Notification } from '../libs/socket.js';
 
 export class UserController {
   constructor() {
@@ -22,6 +23,17 @@ export class UserController {
       const data = await UserService.getUserById(id);
 
       res.status(200).json({ data, message: `Successfully get user data by ID: ${id}.` });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getToken(req, res, next) {
+    try {
+      const { email } = req.body;
+      const token = await UserService.sendToken(email);
+
+      res.status(200).json({ token });
     } catch (err) {
       next(err);
     }
@@ -75,6 +87,20 @@ export class UserController {
           }
         }
       );
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async resetPassword(req, res, next) {
+    try {
+      const { newPassword } = req.body;
+
+      const data = await UserService.updatePassword(req.user.email, newPassword);
+
+      await Notification.push(`User with email : ${req.user.email} has updated their password.`);
+
+      res.status(200).json({ data, message: 'Successfully update user password.' });
     } catch (err) {
       next(err);
     }

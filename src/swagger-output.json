@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "localhost:3000"
     }
   ],
   "components": {
@@ -36,7 +36,7 @@
     }
   ],
   "paths": {
-    "/api/v1/auth/login": {
+    "localhost:3000/api/v1/auth/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "Login User",
@@ -117,7 +117,7 @@
         }
       }
     },
-    "/api/v1/auth/register": {
+    "localhost:3000/api/v1/auth/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "Register User",
@@ -127,9 +127,9 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "name": "Gege Akutami",
-                  "email": "gege@mail.com",
-                  "password": "gege123",
+                  "name": "test",
+                  "email": "test@gmail.com",
+                  "password": "test123",
                   "identity_type": "KTP",
                   "identity_number": "0987654324",
                   "address": "Jl. Hambalang No. 2, Bogor"
@@ -220,7 +220,7 @@
         }
       }
     },
-    "/api/v1/accounts": {
+    "localhost:3000/api/v1/accounts": {
       "get": {
         "tags": ["Accounts"],
         "summary": "Get All Accounts",
@@ -368,7 +368,7 @@
         }
       }
     },
-    "/api/v1/accounts/1": {
+    "localhost:3000/api/v1/accounts/1": {
       "get": {
         "tags": ["Accounts"],
         "summary": "Get Account by Id",
@@ -387,7 +387,7 @@
         }
       }
     },
-    "/api/v1/accounts/1/deposit": {
+    "localhost:3000/api/v1/accounts/1/deposit": {
       "put": {
         "tags": ["Accounts"],
         "summary": "Deposit Balance",
@@ -413,7 +413,7 @@
         }
       }
     },
-    "/api/v1/accounts/1/withdraw": {
+    "localhost:3000/api/v1/accounts/1/withdraw": {
       "put": {
         "tags": ["Accounts"],
         "summary": "Withdraw Balance",
@@ -439,7 +439,7 @@
         }
       }
     },
-    "/api/v1/transactions": {
+    "localhost:3000/api/v1/transactions": {
       "get": {
         "tags": ["Transactions"],
         "summary": "Get All Transactions",
@@ -489,7 +489,7 @@
         }
       }
     },
-    "/api/v1/transactions/1": {
+    "localhost:3000/api/v1/transactions/1": {
       "get": {
         "tags": ["Transactions"],
         "summary": "Get Request by Id",
@@ -508,7 +508,7 @@
         }
       }
     },
-    "/api/v1/users": {
+    "localhost:3000/api/v1/users": {
       "get": {
         "tags": ["Users"],
         "summary": "Get All Users",
@@ -522,7 +522,7 @@
         }
       }
     },
-    "/api/v1/users/1": {
+    "localhost:3000/api/v1/users/7": {
       "get": {
         "tags": ["Users"],
         "summary": "Get User by Id",
@@ -536,10 +536,10 @@
         }
       }
     },
-    "/api/v1/users/1/image": {
+    "localhost:3000/api/v1/users/7/image": {
       "put": {
         "tags": ["Users"],
-        "summary": "New Request",
+        "summary": "Update Image Profile",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -563,6 +563,63 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "localhost:3000/api/v1/users/forget-password": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Forget Password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "koffy696@gmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "localhost:3000/api/v1/users/reset-password": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Reset Password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "newPassword": "fufufafa"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
